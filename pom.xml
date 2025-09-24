@@ -441,26 +441,27 @@
             </plugin>
           </plugins>
         </pluginManagement>
-      </build>
-    </profile>
-  </profiles>
-   <profile>
-      <id>ci</id>
-      <properties>
-        <testcontainers.enabled>false</testcontainers.enabled>
-        <skipITs>true</skipITs>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <configuration>
-              <skipITs>true</skipITs>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+ </build>
+
+<profiles>
+  <profile>
+    <id>ci</id>
+    <properties>
+      <testcontainers.enabled>false</testcontainers.enabled>
+      <skipITs>true</skipITs>
+    </properties>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <configuration>
+            <skipITs>true</skipITs>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>
+
 </project>
