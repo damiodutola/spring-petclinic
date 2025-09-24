@@ -449,12 +449,28 @@
 
     <profile>
       <id>ci</id>
+      <!-- Keep unit tests ON; disable Testcontainers & ITs -->
       <properties>
+        <maven.test.skip>false</maven.test.skip>
         <testcontainers.enabled>false</testcontainers.enabled>
         <skipITs>true</skipITs>
       </properties>
       <build>
         <plugins>
+          <!-- Unit tests: run but exclude container-based tests -->
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <excludes>
+                <!-- Tweak to match your container/DB tests -->
+                <exclude>**/*PostgreSql*Test.java</exclude>
+                <exclude>**/*MySql*Test.java</exclude>
+                <exclude>**/*Container*Test.java</exclude>
+              </excludes>
+            </configuration>
+          </plugin>
+
+          <!-- Integration tests: skip in CI -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
